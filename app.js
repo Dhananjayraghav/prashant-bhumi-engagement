@@ -19,7 +19,7 @@ const shareText = () => C.share.message.replace("{url}", SHARE_URL);
 const WA_URL = () => "https://wa.me/?text=" + encodeURIComponent(shareText());
 const START = new Date(C.startISO), END = new Date(C.endISO);
 const utc = d => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-const morning = C.events[0] && C.events.length > 1 ? `${C.events[0].en} at ${C.events[0].time}. ` : "";
+const morning = C.events[0] && C.events.length > 1 ? `${C.events[0].en} (${C.events[0].hi}) at ${C.events[0].time}. ` : "";
 const EVT_TITLE = `${C.groom.en} & ${C.bride.en} – ${C.occasion.en}`;
 const EVT_DESC = `${morning}${C.occasion.en} at ${C.events[C.events.length - 1]?.time || ""}. Invitation: ${SHARE_URL}`;
 const GCAL = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(EVT_TITLE) +
@@ -42,9 +42,11 @@ const I = {
   wa: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>',
   copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
   map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4z"/><path d="M8 2v16M16 6v16"/></svg>',
+  down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>',
   eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>'
 };
 const ICON = {
+  thali: '<svg viewBox="0 0 40 40"><ellipse cx="20" cy="25" rx="17" ry="7" fill="url(#gGold)"/><ellipse cx="20" cy="23.5" rx="13" ry="4.6" fill="#f6e3b0" stroke="#8a6a25" stroke-width=".6"/><circle cx="13" cy="22" r="3" fill="#e8a33a"/><circle cx="20" cy="21" r="3.2" fill="#fff4d6" stroke="#c9a24a" stroke-width=".5"/><circle cx="27" cy="22" r="3" fill="#b5462e"/><path d="M20 8c3 4 4 7 0 11c-4-4-3-7 0-11z" fill="url(#gFlame)" opacity=".9"/></svg>',
   kalash: '<svg viewBox="0 0 40 40"><path d="M14 13c-3-4-8-4-10-2 4 0 7 2 10 4zM26 13c3-4 8-4 10-2-4 0-7 2-10 4zM18 12c-2-5-1-9 2-10 3 1 4 5 2 10z" fill="#4f8a4a"/><circle cx="20" cy="10" r="4.5" fill="#9a6a35"/><path d="M12 15h16l-2 3c6 3 8 8 6 12-2 5-8 7-12 7s-10-2-12-7c-2-4 0-9 6-12z" fill="url(#gGold)"/><path d="M10 25h20" stroke="#6b1530" stroke-width="1.5"/><path d="M18 22l2 5 2-5" fill="none" stroke="#a8304f" stroke-width="1.5"/></svg>',
   rings: '<svg viewBox="0 0 40 40" fill="none"><circle cx="15" cy="23" r="9" stroke="url(#gGold)" stroke-width="3"/><circle cx="25" cy="23" r="9" stroke="url(#gGold)" stroke-width="3"/><path d="M22 10l3-4 3 4-3 3z" fill="#f1c9cf" stroke="#c9a24a"/></svg>',
   diya: '<svg viewBox="0 0 60 60"><use href="#diya"/></svg>',
@@ -123,12 +125,16 @@ const VENUE = `<svg class="venue-art" viewBox="0 0 280 150" role="img" aria-labe
 /* ---------- pages ---------- */
 const lines = arr => arr.map(x => `<li>${esc(x)}</li>`).join("");
 const hiDate = `${C.date.weekdayHi}, ${hiNum(+C.date.day)} ${C.date.monthHi} ${hiNum(C.date.year)}`;
-const invHTML = C.invitationHi.map(l => {
-  const s = esc(l).replace("{groom}", `<span class="nm">${esc(C.groom.hi)}</span>`).replace("{bride}", `<span class="nm">${esc(C.bride.hi)}</span>`)
-    .replace("{date}", esc(hiDate)).replace("{venue}", esc(V.hi));
-  return s;
-}).join("<br>");
-const hasPhotos = C.photos.length > 0, hasContacts = C.contacts.length > 0;
+const fill = l => esc(l).replace("{groom}", esc(C.groom.hi)).replace("{bride}", esc(C.bride.hi)).replace("{date}", esc(hiDate)).replace("{venue}", esc(V.hi));
+const invHTML = C.invitationHi.map((l, i) => {
+  const k = l.slice(0, 2), body = /^[#~!] /.test(l) ? l.slice(2) : l;
+  const cls = k === "# " ? "il-name" : k === "~ " ? "il-small" : k === "! " ? "il-head" : "il";
+  return `<span class="${cls} rv" style="--d:${Math.min(i, 12) * .5 + 2}">${fill(body)}</span>`;
+}).join("");
+const famHTML = (C.families || []).filter(f => f.items.length).map((f, i) =>
+  `<div class="fam-col"><p class="fam-h">${esc(f.label)} :</p><ul class="fam">${lines(f.items)}</ul></div>`).join("");
+const S = C.sender || {}, hasContacts = !!(S.phones && S.phones.length);
+const hasPhotos = C.photos.length > 0;
 
 const PAGES = [
   `<div class="mid">${GANESHA}
@@ -146,10 +152,9 @@ const PAGES = [
   `<div class="mid">
      <h2 class="eyebrow rv">॥ शुभ सगाई ॥</h2>
      <svg class="divider rv" style="--d:1"><use href="#divider"/></svg>
-     <p class="inv-text rv" style="--d:2">${invHTML}</p>
-     ${C.hosts.length ? `<p class="fam-h rv" style="--d:3">निवेदक</p><ul class="fam rv" style="--d:4">${lines(C.hosts)}</ul>` : ""}
-     ${C.blessings.length ? `<p class="fam-h rv" style="--d:5">आशीर्वाद</p><ul class="fam rv" style="--d:6">${lines(C.blessings)}</ul>` : ""}
-     ${hasPhotos ? `<button class="btn ghost rv" style="--d:7;margin-top:14px" data-act="card">${I.eye} View original card</button>` : ""}</div>`,
+     <p class="inv-text">${invHTML}</p>
+     ${famHTML ? `<div class="fam-grid rv" style="--d:9">${famHTML}</div>` : ""}
+     ${hasPhotos ? `<button class="btn ghost rv" style="--d:10;margin-top:14px" data-act="card">${I.eye} View original card</button>` : ""}</div>`,
 
   `<div class="mid">
      <p class="eyebrow rv" style="font-size:22px">Save the Date</p>
@@ -159,17 +164,20 @@ const PAGES = [
      <div class="row rv" style="--d:6"><button class="btn" data-act="cal">${I.cal} Add to Calendar</button></div></div>`,
 
   `<div class="mid">
-     <h2 class="eyebrow rv">मांगलिक कार्यक्रम</h2>
+     ${C.scheduleShloka ? `<p class="sched-shloka rv">${C.scheduleShloka.map(esc).join("<br>")}</p>` : ""}
+     <h2 class="eyebrow rv" style="--d:1">मांगलिक कार्यक्रम</h2>
      <svg class="divider rv" style="--d:1"><use href="#divider"/></svg>
      <ol class="timeline">${C.events.map((e, i) => `<li class="rv" style="--d:${i * 2 + 2}"><span class="t-ic">${ICON[e.icon] || ICON.lotus}</span>
-       <span><span class="t-time">${esc(e.time)}</span><br>${e.hi ? `<span class="t-hi">${esc(e.hi)}</span><br>` : ""}<span class="t-en">${esc(e.en)}</span></span></li>`).join("")}</ol>
-     <p class="rv" style="--d:7;margin:10px 0 0;font-style:italic;color:var(--ink-2)">${esc(C.date.weekday)}, ${+C.date.day} ${esc(C.date.month)} ${esc(C.date.year)}</p></div>`,
+       <span><span class="t-time">${esc(e.time)}</span>${e.hiTime ? ` <span class="t-hitime">${esc(e.hiTime)}</span>` : ""}<br>${e.hi ? `<span class="t-hi">${esc(e.hi)}</span><br>` : ""}<span class="t-en">${esc(e.en)}</span></span></li>`).join("")}</ol>
+     <p class="rv" style="--d:6;margin:8px 0 0;font-style:italic;color:var(--ink-2)">${esc(C.date.weekday)}, ${+C.date.day} ${esc(C.date.month)} ${esc(C.date.year)} · <span class="hi">${esc(C.date.weekdayHi)}</span></p>
+     ${C.balAagrah ? `<div class="aagrah rv" style="--d:7"><p class="ag-h">बाल आग्रह</p><p class="ag-t">${C.balAagrah.lines.map(esc).join("<br>")}</p><p class="ag-by">— ${esc(C.balAagrah.by)}</p></div>` : ""}
+     ${C.visheshAagrah ? `<p class="vishesh rv" style="--d:8"><b>विशेष आग्रह :</b> ${esc(C.visheshAagrah)}</p>` : ""}</div>`,
 
   `<div class="mid">
      <h2 class="eyebrow rv">समारोह स्थल</h2>
      ${VENUE}
      <p class="venue-name rv" style="--d:1">${esc(V.en)}</p>
-     <p class="venue-hi rv" style="--d:2">${esc(V.hi)}</p>
+     <p class="venue-hi rv" style="--d:2">${esc(V.hi)}${V.hiAddress ? `<span>${esc(V.hiAddress)}</span>` : ""}</p>
      <p class="addr rv" style="--d:3">${esc(V.address)}</p>
      <p class="route-hi rv" style="--d:4">समारोह स्थल तक पहुँचने का मार्ग</p>
      <a class="btn big rv" style="--d:5;margin-top:8px" href="${esc(DIR_URL)}" target="_blank" rel="noopener">${I.pin} Get Directions</a>
@@ -178,9 +186,10 @@ const PAGES = [
   hasPhotos ? `<div class="mid">
      <h2 class="eyebrow rv">मूल निमंत्रण पत्र</h2>
      <p class="en-sub rv" style="--d:1">The original invitation · tap to enlarge</p>
-     <div class="gallery rv" style="--d:2">${C.photos.map((p, i) => `<button class="g-item" data-photo="${i}" aria-label="Enlarge ${esc(p.caption || "photo " + (i + 1))}">
-       <img src="${esc(p.src)}" alt="${esc(p.caption || "Invitation card")}" loading="lazy" style="filter:${esc(C.photoFilter)};${p.rotate ? `transform:rotate(${+p.rotate}deg)${p.rotate % 180 ? " scale(.75)" : ""}` : ""}"></button>`).join("")}</div>
-     ${C.photos.length > 1 ? `<p class="g-cap rv" style="--d:3">Swipe for more ›</p>` : ""}</div>` : null,
+     <div class="gallery rv" style="--d:2">${C.photos.map((p, i) => `<button class="g-item${p.cutout ? " cutout" : ""}" data-photo="${i}" aria-label="Enlarge ${esc(p.caption || "photo " + (i + 1))}">
+       <img src="${esc(p.src)}" alt="${esc(p.caption || "Invitation card")}" loading="lazy" style="filter:${esc(C.photoFilter)};${p.rotate ? `transform:rotate(${+p.rotate}deg)${p.rotate % 180 ? " scale(.75)" : ""}` : ""}"><span class="g-label">${esc(p.caption || "")}</span></button>`).join("")}</div>
+     ${C.photos.length > 1 ? `<p class="g-cap rv" style="--d:3">Swipe for more ›</p>` : ""}
+     ${C.pdf ? `<a class="btn rv" style="--d:4;margin-top:6px" href="${esc(C.pdf)}" download target="_blank" rel="noopener">${I.down} Download card (PDF)</a>` : ""}</div>` : null,
 
   `<div class="mid">
      <div class="diyas rv"><svg><use href="#diya"/></svg><svg><use href="#diya"/></svg><svg><use href="#diya"/></svg></div>
@@ -310,12 +319,13 @@ function calSheet() {
     <p class="note">${esc(C.date.weekday)}, ${+C.date.day} ${esc(C.date.month)} ${esc(C.date.year)} · ${esc(C.events[C.events.length - 1]?.time || "")} IST · reminder one day before</p>`);
 }
 function contactSheet() {
-  openSheet("Contact Family", C.contacts.map(c => {
-    const digits = String(c.phone).replace(/\D/g, "");
-    return `<div class="contact"><span class="who">${esc(c.name)}<small>${esc(c.phone)}</small></span>
-      <a class="btn" href="tel:${esc(c.phone.replace(/\s/g, ""))}" aria-label="Call ${esc(c.name)}">${I.phone}</a>
-      <a class="btn wine" href="https://wa.me/${digits}" target="_blank" rel="noopener" aria-label="WhatsApp ${esc(c.name)}">${I.wa}</a></div>`;
-  }).join(""));
+  const nums = S.phones.map(ph => {
+    const digits = String(ph).replace(/\D/g, ""), tel = "+" + digits;
+    return `<div class="contact"><span class="who"><small>Mobile</small>${esc(ph)}</span>
+      <a class="btn" href="tel:${esc(tel)}" aria-label="Call ${esc(ph)}">${I.phone}</a>
+      <a class="btn wine" href="https://wa.me/${digits}" target="_blank" rel="noopener" aria-label="WhatsApp ${esc(ph)}">${I.wa}</a></div>`;
+  }).join("");
+  openSheet("Contact Family", `<div class="sender"><p class="snd-l">प्रेषक</p><p class="snd-n">${esc(S.name)}</p>${(S.lines || []).map(l => `<p class="snd-a">${esc(l)}</p>`).join("")}</div>${nums}`);
 }
 
 /* ---------- actions ---------- */
@@ -327,7 +337,7 @@ book.addEventListener("click", e => {
   if (act === "share") shareSheet();
   if (act === "cal") calSheet();
   if (act === "contact") contactSheet();
-  if (act === "card") openLB(0);
+  if (act === "card") openLB(C.invitationPhoto || 0);
   if (act === "again") { go(0); FX.burst(16); }
   if (act === "map") { $("#mapSlot").innerHTML = `<iframe class="map-frame" src="${esc(MAP_EMBED)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map of ${esc(V.en)}"></iframe>`; }
 });
@@ -340,7 +350,7 @@ const applyZ = () => { lbImg.style.transform = `translate(${z.x}px,${z.y}px) sca
 function showLB(i) {
   li = (i + C.photos.length) % C.photos.length; const p = C.photos[li];
   rot = +p.rotate || 0; z = { s: 1, x: 0, y: 0 };
-  lbImg.src = p.src; lbImg.alt = p.caption || "Invitation card"; lbImg.style.filter = C.photoFilter;
+  lbImg.src = p.src; lbImg.alt = p.caption || "Invitation card"; lbImg.style.filter = C.photoFilter; lbImg.classList.toggle("cut", !!p.cutout);
   lbImg.style.maxWidth = rot % 180 ? "84vh" : ""; lbImg.style.maxHeight = rot % 180 ? "94vw" : "";
   applyZ();
   lb.querySelectorAll(".lb-nav").forEach(b => b.hidden = C.photos.length < 2);

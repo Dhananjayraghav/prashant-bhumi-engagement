@@ -2,20 +2,22 @@
 
 A static website (no server, no database, no login). Open `index.html` through any web host.
 
-## 1. Fill in the details from the printed card
-Open **config.js** in Notepad/VS Code. Everything is there:
-- `hosts`, `blessings` — family names (निवेदक / आशीर्वाद). Empty = hidden.
-- `contacts` — `{ name: "श्री ...", phone: "+91..." }`. Adds Call + WhatsApp buttons and the "Contact" button.
-- `events` — times and exact Hindi ceremony names (the 11 AM name needs confirming).
-- `photos` — put the 3 card photos in `/photos` (JPG, ~1600px long side, under 400 KB each) and list them. This turns on the Gallery page and the "View original card" button. Use `rotate: 90` etc. if a photo is sideways.
+## 1. Edit the details
+Open **config.js** in Notepad/VS Code. Everything is there, already filled in from the printed card:
+- `invitationHi` — the invitation text line by line (`# ` = big name line, `~ ` = small line, `! ` = heading).
+- `families` — दर्शनाभिलाषी / विनीत lists.
+- `events` — times and ceremony names (प्रीतिभोज, वाग्दान संस्कार).
+- `sender` — name, address and phone numbers shown under "Contact Family".
+- `balAagrah`, `visheshAagrah` — the children's and special requests (schedule page).
+- `photos` — the card photos in `/photos`; `pdf` — the printable card in `/assets`.
 - `couplePhoto` — optional, replaces the bride & groom illustration.
-- `venue.placeId` — paste the Google place id if confirmed (see comment in file).
+- `venue.placeId` — paste the Google place id if you confirm the venue on Maps.
 - `music.src` — optional MP3 in `/assets`; empty = built-in soft raga melody.
 
 ## 2. Deploy (free, ~2 minutes) — Netlify
 1. Go to https://app.netlify.com/drop and sign in.
 2. Drag this whole folder onto the page.
-3. Site settings → Change site name → `prashant-bhumi-engagement` (gives https://prashant-bhumi-engagement.netlify.app).
+3. Site settings → Change site name → `prashant-bhumi-engagement` (gives https://dhananjayraghav.github.io/prashant-bhumi-engagement).
    If you pick a different name, replace that address in `config.js` (`siteUrl`) and the 4 `<meta>` lines at the top of `index.html`, then drag the folder again.
 
 Vercel/GitHub Pages also work — just upload the folder as-is.

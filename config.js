@@ -20,49 +20,78 @@ window.INVITE = {
   endISO: "2026-12-06T21:00:00+05:30",
   date: { day: "06", month: "December", monthHi: "दिसम्बर", year: "2026", weekday: "Sunday", weekdayHi: "रविवार" },
 
-  /* Ceremony schedule. icon: "kalash" | "rings" | "diya" | "lotus" */
+  /* Ceremony schedule — names exactly as printed on the card.
+     icon: "thali" | "kalash" | "rings" | "diya" | "lotus" */
   events: [
-    // ⚠ CONFIRM: replace with the exact Hindi ceremony name printed on the card
-    { time: "11:00 AM", en: "Morning Ceremony", hi: "प्रातःकालीन कार्यक्रम", icon: "kalash" },
-    { time: "4:00 PM", en: "Engagement Ceremony", hi: "सगाई समारोह", icon: "rings" }
+    { time: "11:00 AM", hiTime: "11:00 बजे दोपहर", en: "Feast", hi: "प्रीतिभोज", icon: "thali" },
+    { time: "4:00 PM", hiTime: "4:00 बजे सायं", en: "Engagement Ceremony", hi: "वाग्दान संस्कार (सगाई समारोह)", icon: "rings" }
   ],
+  scheduleShloka: ["विघ्न हरण मंगल करण श्री गणपति महाराज।", "प्रथम निमंत्रण आपको पूरण कीजो काज।।"],
 
   venue: {
     en: "Shilpa Marriage Home",
     hi: "शिल्पा मैरिज होम",
+    hiAddress: "पहासू रोड, खुर्जा",
     address: "Pahasu Road, Khurja, Uttar Pradesh, India",
-    /* ⚠ CONFIRM: Google Maps lists "Shilpa Garden", Pahasu Road, Khurja
-       (place id ChIJuVAacXKpDDkRXhtILBt5ebc). If that IS the venue, paste the id
-       below so directions land on the exact gate. Leave "" to route by address. */
+    /* Google Maps lists "Shilpa Garden", Pahasu Road, Khurja (place id ChIJuVAacXKpDDkRXhtILBt5ebc).
+       If that IS the venue, paste the id below so directions land on the exact gate.
+       Leave "" to route by name + address. */
     placeId: ""
   },
 
-  /* Traditional invitation text (Page 3). Use {groom} {bride} {date} {venue}. */
+  /* Invitation text (Page 3), exactly as printed. Line prefixes:
+     "# " = large name line,  "~ " = small line,  "! " = heading line */
   invitationHi: [
-    "परमपिता परमेश्वर की असीम अनुकम्पा एवं पूज्य बुजुर्गों के आशीर्वाद से",
-    "चि. {groom} संग आयु. {bride}",
-    "का शुभ सगाई समारोह दिनांक {date} को {venue} में सम्पन्न होना निश्चित हुआ है।",
-    "इस मंगल अवसर पर आप सपरिवार सादर आमंत्रित हैं।"
+    "~ मान्यवर,",
+    "परमपिता परमात्मा की असीम अनुकम्पा से",
+    "! श्रीमती शकुन्तला देवी एवं श्री दौलत सिंह राघव",
+    "अपने प्रिय सुपौत्र",
+    "# चि० प्रशान्त",
+    "~ सुपुत्र श्रीमती निशा राघव एवं श्री ठाकुर दास सिंह राघव",
+    "~ निवासी : ग्राम पलरा, जिला बुलन्दशहर",
+    "परिणय",
+    "# आयु० भूमि",
+    "~ (सुपुत्री श्रीमती कल्पना रावल एवं श्री धीरज सिंह रावल)",
+    "~ निवासी : मौ० आमका, दादरी, जिला गौतम बुद्ध नगर",
+    "के",
+    "! सगाई समारोह",
+    "की मांगलिक बेला पर आपको सादर आमन्त्रित करते हैं",
+    "विधाता की तुलिका से रचित स्नेह मिलन के समारोह में",
+    "कार्यक्रमानुसार पधार कर हमें अनुग्रहित करें।"
   ],
 
-  /* ⚠ CONFIRM — copy exactly from the card. Leave [] to hide. */
-  hosts: [            // "निवेदक" / with best compliments from
-    // "श्री ______ एवं श्रीमती ______",
+  /* Family lists from the card. Leave items: [] to hide a list. */
+  families: [
+    { label: "दर्शनाभिलाषी", items: ["मोहित राघव (इंजीनियर)", "डॉ. युग राघव, डॉ. धनन्जय राघव", "रोहन राघव एवं समस्त राघव परिवार"] },
+    { label: "विनीत", items: ["हुक्म सिंह राघव", "कुँवरपाल सिंह राघव", "रवि राघव"] }
   ],
-  blessings: [        // "आशीर्वाद" (grandparents / elders)
-    // "श्री ______",
-  ],
-  contacts: [         // shown in "Contact Family"; phone with country code
-    // { name: "श्री ______", phone: "+91XXXXXXXXXX" },
-  ],
+
+  /* "Contact Family" — the sender (प्रेषक) printed on the envelope. */
+  sender: {
+    name: "ठाकुर दास सिंह राघव",
+    lines: ["R.G. Public School, Heerapur (BSR)", "निवासी : ग्राम पलरा, जिला बुलन्दशहर (उ०प्र०)"],
+    phones: ["+91 96391 02655", "+91 83938 38333", "+91 84399 96664"]
+  },
+
+  /* The children's request and special request from the card (closing page). */
+  balAagrah: {
+    lines: ["समय भी गुजरा घड़ी भी गुजरी, आया समय मिलन का।", "बरसन लागे फूल नवयुगल पर, आया समय विहार का...", "हमाले चाचू की सगाई में जलूल-जलूल आना..."],
+    by: "सार्थक, बिनी, कृशिव"
+  },
+  visheshAagrah: "कृपया इस कार्ड को ही व्यक्तिगत बुलावे की मान्यता प्रदान करें।",
+
+  /* Printable card (PDF) offered on the gallery page. Leave "" to hide. */
+  pdf: "assets/Prashant-Bhumi-Engagement-Invitation.pdf",
 
   /* Original card photos (put files in /photos). rotate: 0 | 90 | 180 | 270 */
   photos: [
-    // { src: "photos/card-1.jpg", caption: "Cover", rotate: 0 },
-    // { src: "photos/card-2.jpg", caption: "Invitation", rotate: 0 },
-    // { src: "photos/card-3.jpg", caption: "Programme", rotate: 0 },
+    { src: "photos/card-1-envelope.jpg", caption: "लिफ़ाफ़ा · Envelope" },
+    { src: "photos/card-2-cover.png", caption: "आवरण · Card cover", cutout: true },
+    { src: "photos/card-3-invitation.jpg", caption: "निमंत्रण · Invitation" },
+    { src: "photos/card-4-programme.jpg", caption: "मांगलिक कार्यक्रम · Programme" }
   ],
-  photoFilter: "brightness(1.06) contrast(1.06)",   // readability boost, text untouched
+  invitationPhoto: 2,   // which photo "View original card" opens (0 = first)
+  photoFilter: "none",   // photos are already straightened and brightened
 
   /* Optional couple photo for Page 2 (replaces the illustration), e.g. "photos/couple.jpg" */
   couplePhoto: "",

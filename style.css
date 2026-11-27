@@ -202,7 +202,7 @@ h2{margin:0;font-weight:400}
 .count{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%;max-width:340px;margin:14px auto 6px}
 .count div{background:linear-gradient(160deg,var(--wine),var(--maroon));border-radius:8px;padding:10px 0 8px;color:var(--champ);
   box-shadow:inset 0 0 0 1px rgba(232,211,160,.45),0 4px 10px rgba(74,13,31,.25)}
-.count b{display:block;font-size:clamp(24px,7vw,30px);font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.count b{display:block;font-size:clamp(24px,7vw,30px);font-weight:600;line-height:1;font-variant-numeric:lining-nums tabular-nums}
 .count small{font-size:13px;letter-spacing:.06em;opacity:.85}
 .celebrate{font-family:var(--script);font-size:34px;color:var(--burgundy);margin:12px 0}
 .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
@@ -390,3 +390,38 @@ h2{margin:0;font-weight:400}
 @keyframes bookIn{0%{opacity:0;transform:translateY(60px) scale(.7) rotateX(25deg)}60%{opacity:1}100%{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){#doors,#flash,.rays{display:none!important}}
 #story:not(.enter) .book-wrap,#story:not(.enter) .book-nav,#story:not(.enter) .swipe-hint{opacity:0}
+
+/* ===== card details (v3) ===== */
+.inv-text>span{display:block}
+.inv-text .il-small{font-size:clamp(14.5px,3.9vw,16px);color:var(--ink-2);line-height:1.6}
+.inv-text .il-head{font-family:var(--hid);color:var(--burgundy);font-size:clamp(18px,4.9vw,21px);line-height:1.5}
+.inv-text .il-name{font-family:var(--hid);color:var(--burgundy);font-size:clamp(24px,6.6vw,29px);line-height:1.35;margin:2px 0}
+.fam-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;width:100%;max-width:26rem;margin-top:12px;padding-top:10px;border-top:1px solid rgba(201,162,74,.5)}
+.fam-col{text-align:left}.fam-col+.fam-col{text-align:right}
+.fam-grid .fam-h{font-size:16px;margin:0 0 2px}
+.fam-grid .fam{font-size:15px;line-height:1.65}
+.sched-shloka{font-family:var(--hi);font-size:15.5px;color:var(--ink-2);line-height:1.7;margin:0 0 8px}
+.t-hitime{font-family:var(--hi);font-size:15px;color:var(--ink-2);white-space:nowrap}
+.timeline li{padding:9px 0}
+.aagrah{width:100%;max-width:340px;margin-top:12px;padding:10px 12px;border-radius:10px;background:rgba(241,201,207,.28);box-shadow:inset 0 0 0 1px rgba(201,162,74,.55)}
+.ag-h{font-family:var(--hid);color:var(--burgundy);font-size:17px;margin:0}
+.ag-t{font-family:var(--hi);font-size:15.5px;line-height:1.7;margin:2px 0 0}
+.ag-by{font-family:var(--hi);font-size:15px;color:var(--gold-d);margin:2px 0 0}
+.vishesh{font-family:var(--hi);font-size:14.5px;line-height:1.6;color:var(--ink-2);margin:10px 0 0;max-width:22rem}
+.vishesh b{font-weight:400;color:var(--burgundy)}
+.venue-hi span{display:block;font-family:var(--hi);font-size:17px;color:var(--ink-2)}
+.g-item img{object-fit:contain;background:var(--noise),#f7eedb}
+.g-item.cutout img{background:radial-gradient(circle at 50% 40%,#8a2244,#4a0d1f)}
+.g-label{display:block;font-family:var(--hi);font-size:14px;line-height:1.3;color:var(--maroon);margin-top:6px;font-weight:400}
+.sender{text-align:center;padding:4px 0 6px}
+.snd-l{margin:0;font-family:var(--hi);color:var(--ink-2);font-size:15px}
+.snd-n{margin:0;font-family:var(--hid);color:var(--burgundy);font-size:22px;line-height:1.4}
+.snd-a{margin:0;font-family:var(--hi);font-size:15px;color:var(--ink-2);line-height:1.5}
+.contact .who{font-family:var(--en);font-size:19px;font-weight:600;font-variant-numeric:lining-nums tabular-nums}
+.contact .who small{font-weight:400;font-size:13px}
+.lb-stage img.cut{border:0;box-shadow:none;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
+#sheetBody .contact .btn{width:auto;flex:none;min-width:54px;padding:10px 14px}
+.contact .who{min-width:0;white-space:nowrap}
+.fam-grid{grid-template-columns:minmax(0,1fr);gap:8px;text-align:center}
+.fam-col,.fam-col+.fam-col{text-align:center}
+@media (min-width:700px){.fam-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fam-col{text-align:left}.fam-col+.fam-col{text-align:right}}
