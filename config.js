@@ -87,8 +87,8 @@ window.INVITE = {
   photos: [
     { src: "photos/card-1-envelope.jpg", caption: "लिफ़ाफ़ा · Envelope" },
     { src: "photos/card-2-cover.png", caption: "आवरण · Card cover", cutout: true },
-    { src: "photos/card-3-invitation.jpg", caption: "निमंत्रण · Invitation" },
-    { src: "photos/card-4-programme.jpg", caption: "मांगलिक कार्यक्रम · Programme" }
+    { src: "photos/card-3-invitation.png", caption: "निमंत्रण · Invitation", cutout: true },
+    { src: "photos/card-4-programme.png", caption: "मांगलिक कार्यक्रम · Programme", cutout: true }
   ],
   invitationPhoto: 2,   // which photo "View original card" opens (0 = first)
   photoFilter: "none",   // photos are already straightened and brightened
